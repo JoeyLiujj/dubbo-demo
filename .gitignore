@@ -1,0 +1,7 @@
+.idea/
+*.iml
+dubbo-api/target
+dubbo-consumer/target
+dubbo-consumer1/target
+dubbo-provider/target
+dubbo-provider1/target
