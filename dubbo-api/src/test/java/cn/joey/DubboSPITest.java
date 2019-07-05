@@ -1,7 +1,12 @@
 package cn.joey;
 
 import cn.joey.demo.Robot;
+import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.ExtensionLoader;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ServiceLoader;
 
 /**
  * @auther liujiji
@@ -10,13 +15,16 @@ import org.apache.dubbo.common.extension.ExtensionLoader;
 public class DubboSPITest {
 
     public static void main(String[] args) {
-        ExtensionLoader<Robot> extensionLoader = ExtensionLoader.getExtensionLoader(Robot.class);
-
-        Robot optimusPrime = extensionLoader.getExtension("optimusPrime");
-        optimusPrime.sayHello();
-
-        Robot bumblebee = extensionLoader.getExtension("bumblebee");
-        bumblebee.sayHello();
+        Robot adaptiveExtension = ExtensionLoader.getExtensionLoader(Robot.class).getAdaptiveExtension();
+        System.out.println(adaptiveExtension);
+        Map map=new HashMap();
+        map.put("robot","bumblebee");
+        URL url=new URL("dubbo","localhost",9000,map);
+        adaptiveExtension.sayHello(url);
+//        Robot optimusPrime = extensionLoader.getExtension("optimusPrime");
+//        optimusPrime.sayHello();
+//        Robot bumblebee = extensionLoader.getExtension("bumblebee");
+//        bumblebee.sayHello();
     }
 
 }
